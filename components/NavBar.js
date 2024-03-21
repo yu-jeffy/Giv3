@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
-
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const NavBar = () => {
   return (
@@ -16,6 +16,9 @@ const NavBar = () => {
         <Link to="/About" className="nav-item">About</Link>
         <Link to="/Campaigns" className="nav-item">Campaigns</Link>
         <Link to="/Create" className="nav-item">Create</Link>
+      </div>
+      <div className="navbar-connect">
+        <ConnectButton />
       </div>
     </nav>
   );
