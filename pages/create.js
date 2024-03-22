@@ -1,9 +1,9 @@
-import Image from 'next/image'
 import styles from '../styles/Create.module.css'
 import CreateCampaignForm from '../components/CreateCampaignForm';
-import { ethers } from 'ethers';
+import React, { useEffect } from 'react';
 
 const Create = () => {
+    
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Create Page</h1>

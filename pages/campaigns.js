@@ -1,23 +1,40 @@
-import Image from 'next/image'
 import styles from '../styles/Campaigns.module.css'
+import CampaignStatus from '../components/CampaignStatus';
+import { ethers } from 'ethers';
+import factoryABI from '../abi/CampaignFactoryABI.json';
+import React, { useState, useEffect } from 'react';
+
+const factoryAddress = '0x6626A5bc9f19DCa28be96b78a3fea299175d3735';
 
 const Campaigns = () => {
+
+    const [campaignAddresses, setCampaignAddresses] = useState([]); // Array to hold campaign addresses
+
+    useEffect(() => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const factoryContract = new ethers.Contract(factoryAddress, factoryABI, provider);
+
+        const fetchCampaignAddresses = async () => {
+            const filter = factoryContract.filters.CampaignCreated();
+            const events = await factoryContract.queryFilter(filter);
+            const addresses = events.map(event => event.args.campaignAddress);
+            setCampaignAddresses(addresses);
+        };
+
+        fetchCampaignAddresses();
+    }, []);
 
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Campaigns</h1>
             <div className={styles.campaignList}>
-                <div className={styles.campaignItem}>
-                    <Image src="/path/to/campaign1.jpg" alt="Campaign 1" width={500} height={300} />
-                    <h2>Campaign 1</h2>
-                    <p>Description for Campaign 1...</p>
+                <div>
+                    <h2>All Campaigns</h2>
+                    {/* Dynamically render CampaignStatus for each campaign */}
+                    {campaignAddresses.map((address, index) => (
+                        <CampaignStatus key={index} campaignAddress={address} />
+                    ))}
                 </div>
-                <div className={styles.campaignItem}>
-                    <Image src="/path/to/campaign2.jpg" alt="Campaign 2" width={500} height={300} />
-                    <h2>Campaign 2</h2>
-                    <p>Description for Campaign 2...</p>
-                </div>
-                {/* Add more campaign items as needed */}
             </div>
         </div>
     );

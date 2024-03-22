@@ -1,7 +1,9 @@
-import Image from 'next/image'
-import styles from '../styles/About.module.css'
+import React from 'react';
+import Image from 'next/image';
+import styles from '../styles/About.module.css';
 
 const About = () => {
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>About</h1>
