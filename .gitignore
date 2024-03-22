@@ -37,4 +37,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# hardhat config
 hardhat.config.js

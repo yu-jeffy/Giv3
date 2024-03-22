@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
-import CampaignFactoryABI from 'artifacts/contracts/giv3_v5.sol/CampaignFactory.json'; 
+import CampaignFactoryABI from '../abi/CampaignFactoryABI.json';
 
 const CreateCampaignForm = ({ campaignFactoryAddress }) => {
   const [minimumDonation, setMinimumDonation] = useState('');
   const [goal, setGoal] = useState('');
+  const [newCampaignAddress, setNewCampaignAddress] = useState('');
 
   const createCampaign = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -15,9 +16,11 @@ const CreateCampaignForm = ({ campaignFactoryAddress }) => {
     }
 
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []); // Request user's account
-      const signer = provider.getSigner();
+      // Instantiate BrowserProvider with the injected Ethereum provider
+      const browserProvider = new ethers.BrowserProvider(window.ethereum);
+
+      // Get signer for transactions
+      const signer = await browserProvider.getSigner();
 
       const campaignFactory = new ethers.Contract(
         campaignFactoryAddress,
@@ -25,14 +28,26 @@ const CreateCampaignForm = ({ campaignFactoryAddress }) => {
         signer
       );
 
-      const transactionResponse = await campaignFactory.createCampaign(
-        ethers.utils.parseEther(minimumDonation.toString()),
-        ethers.utils.parseEther(goal.toString())
-      );
+      // Convert string values to BigInt using ethers.utils.parseEther
+      const minDonationBigInt = ethers.parseEther(minimumDonation);
+      const goalBigInt = ethers.parseEther(goal);
+
+      // Send transaction
+      const transactionResponse = await campaignFactory.createCampaign(minDonationBigInt, goalBigInt);
       await transactionResponse.wait(); // Wait for the transaction to be mined
 
+      // Assuming the event `CampaignCreated` is emitted, we would fetch the transaction receipt to access the events
+      const receipt = await transactionResponse.wait();
+      const campaignCreatedEvent = receipt.events?.find(event => event.event === 'CampaignCreated');
+
+      if (campaignCreatedEvent) {
+        const newCampaignAddress = campaignCreatedEvent.args.newCampaignAddress;
+        console.log('New campaign address:', newCampaignAddress);
+        alert(`Campaign created successfully at address: ${newCampaignAddress}`);
+        setNewCampaignAddress(newCampaignAddress);  // This sets your state variable
+      }
+
       alert('Campaign created successfully!');
-      // Reset form
       setMinimumDonation('');
       setGoal('');
     } catch (err) {
@@ -42,27 +57,30 @@ const CreateCampaignForm = ({ campaignFactoryAddress }) => {
   };
 
   return (
-    <form onSubmit={createCampaign}>
-      <div>
-        <label htmlFor="minimumDonation">Minimum Donation (ETH):</label>
-        <textarea
-          id="minimumDonation"
-          value={minimumDonation}
-          onChange={(e) => setMinimumDonation(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="goal">Goal (ETH):</label>
-        <textarea
-          id="goal"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Create Campaign</button>
-    </form>
+    <div>
+      <form onSubmit={createCampaign}>
+        <div>
+          <label htmlFor="minimumDonation">Minimum Donation (ETH):</label>
+          <textarea
+            id="minimumDonation"
+            value={minimumDonation}
+            onChange={(e) => setMinimumDonation(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="goal">Goal (ETH):</label>
+          <textarea
+            id="goal"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Create Campaign</button>
+      </form>
+      {newCampaignAddress && <p>New Campaign Address: {newCampaignAddress}</p>}
+    </div>
   );
 };
 

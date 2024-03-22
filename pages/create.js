@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from '../styles/Create.module.css'
 import CreateCampaignForm from '../components/CreateCampaignForm';
-import { YourCampaignFactoryAddress } from '../config'; // Ensure you have this constant properly set
+import { ethers } from 'ethers';
 
 const Create = () => {
     return (
@@ -9,7 +9,7 @@ const Create = () => {
             <h1 className={styles.title}>Create Page</h1>
             <div>
                 <h1>Create a New Campaign</h1>
-                <CreateCampaignForm campaignFactoryAddress={YourCampaignFactoryAddress} />
+                <CreateCampaignForm campaignFactoryAddress={"0x6626A5bc9f19DCa28be96b78a3fea299175d3735"} />
             </div>
         </div>
     );

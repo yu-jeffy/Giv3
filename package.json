@@ -20,6 +20,7 @@
     "web3": "^4.6.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
     "@types/node": "^18.19.3",
     "@types/react": "^18.2.64",
     "eslint": "^8.15.0",
