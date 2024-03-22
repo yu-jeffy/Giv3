@@ -2,6 +2,7 @@ import Image from 'next/image'
 import styles from '../styles/Campaigns.module.css'
 
 const Campaigns = () => {
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Campaigns</h1>
