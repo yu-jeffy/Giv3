@@ -1,24 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './NavBar.css';
+import Link from 'next/link';
+import styles from '../styles/NavBar.module.css';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const NavBar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
+    <nav className={styles.navbar}>
+      <div className={styles.navbarLogo}>
         <h1>giv3</h1>
         {/* Insert your logo below */}
         {/*<img src="/path-to-your-logo.png" alt="Logo" />*/}
       </div>
-      <div className="navbar-links">
-        <Link to="/" className="nav-item">Home</Link>
-        <Link to="/About" className="nav-item">About</Link>
-        <Link to="/Campaigns" className="nav-item">Campaigns</Link>
-        <Link to="/Create" className="nav-item">Create</Link>
-      </div>
-      <div className="navbar-connect">
-        <ConnectButton />
+      <div className = {styles.right}>
+        <div className={styles.navbarLinkContainer}>
+          <Link className={styles.navbarLink} href="/">Home</Link>
+          <Link className={styles.navbarLink} href="/About">About</Link>
+          <Link className={styles.navbarLink} href="/Campaigns">Campaigns</Link>
+          <Link className={styles.navbarLink} href="/Create">Create</Link>
+        </div>
+        <div className={styles.navbarConnect}>
+          <ConnectButton className={styles.navbarConnect}/>
+        </div>
       </div>
     </nav>
   );

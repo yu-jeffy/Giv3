@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  height: 7.5vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+.navbarLogo h1, .navbarLogo img {
+  display: inline-block;
+  padding-right: 10px;
+  box-sizing: border-box;
+  width: 20%;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80%;
+}
+
+.navbarLinkContainer .nav-item {
+  width: fit-content;
+  padding-right: 2vw;
+}
+
+.navbarLink {
+  padding-left: 1vw;
+  padding-right: 1vw;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.navItem:hover {
+  text-decoration: underline;
+}
+
+.navbarConnect {
+  width: fit-content;
+  box-sizing: border-box;
+}
