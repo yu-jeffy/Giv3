@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 
 const Home: NextPage = () => {
+  const { isConnected } = useAccount();
+
   const texts: string[] = ["joy", "peace", "support", "love", "hope", "friendship", "life", "freedom", "courage", "inspiration"];
   const [currentText, setCurrentText] = useState<string>('');
   const [arrayIndex, setArrayIndex] = useState<number>(0);
@@ -88,13 +93,30 @@ const Home: NextPage = () => {
       {/* Content */}
       <div className={styles.homeSection}>
         <h1 className={styles.mainText}>giv3 {currentText}</h1>
+        <h2 className={styles.subText}>decentralized fundraising</h2>
+        <h2 className={styles.subText}>hosted on ethereum sepolia testnet</h2>
+        {isConnected ? (
+          <Link href="/campaigns">
+            <button className={styles.subButton}>View Campaigns</button>
+          </Link>
+        ) : (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <ConnectButton />
+            <h3 className={styles.subText}>Connect Wallet To Enter App</h3>
+          </div>
+        )}
       </div>
-      <div className={styles.homeSection}>
+      {/* <div className={styles.homeSection}>
         <h2>this is section 2</h2>
-      </div>
-      <div className={styles.homeSection}>
+      </div> */}
+      {/* <div className={styles.homeSection}>
         <h2>this is section 3</h2>
-      </div>
+      </div> */}
 
       <style jsx>{`
         .svgContainer {
