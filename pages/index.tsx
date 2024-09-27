@@ -94,7 +94,7 @@ const Home: NextPage = () => {
       <div className={styles.homeSection}>
         <h1 className={styles.mainText}>giv3 {currentText}</h1>
         <h2 className={styles.subText}>decentralized fundraising</h2>
-        <h2 className={styles.subText}>hosted on ethereum sepolia testnet</h2>
+        <h2 className={styles.subText}>hosted on polygon network</h2>
         {isConnected ? (
           <Link href="/campaigns">
             <button className={styles.subButton}>View Campaigns</button>

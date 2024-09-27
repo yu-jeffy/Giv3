@@ -17,7 +17,6 @@ const NavBar = () => {
       <div className = {styles.right}>
         <div className={styles.navbarLinkContainer}>
           <Link className={styles.navbarLink} href="/">Home</Link>
-          <Link className={styles.navbarLink} href="/about">About</Link>
           {isConnected && (
             <>
 

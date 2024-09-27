@@ -99,8 +99,8 @@ export default function CampaignDetails() {
                                     </Link>
                                 </span>
                             </p>
-                            <p><span>Goal:</span> <span className={styles.detailValue}>{campaign.goal} ETH</span></p>
-                            <p><span>Pledged:</span> <span className={styles.detailValue}>{campaign.pledged} ETH</span></p>
+                            <p><span>Goal:</span> <span className={styles.detailValue}>{campaign.goal} POL</span></p>
+                            <p><span>Pledged:</span> <span className={styles.detailValue}>{campaign.pledged} POL</span></p>
                             <p><span>Deadline:</span> <span className={styles.detailValue}>{campaign.deadline}</span></p>
                             <p><span>Goal Reached:</span> <span className={styles.detailValue}>{campaign.goalReached ? 'Yes' : 'No'}</span></p>
                             <p><span>Funds Claimed:</span> <span className={styles.detailValue}>{campaign.fundsClaimed ? 'Yes' : 'No'}</span></p>
@@ -111,11 +111,11 @@ export default function CampaignDetails() {
                             <div className={styles.donationForm}>
                                 <input
                                     type="text"
-                                    placeholder="Amount in ETH"
+                                    placeholder="Amount in POL"
                                     value={donationAmount}
                                     onChange={(e) => setDonationAmount(e.target.value)}
                                     className={styles.input}
-                                    aria-label="Donation amount in ETH"
+                                    aria-label="Donation amount in POL"
                                 />
                                 <button 
                                     onClick={handleDonate} 

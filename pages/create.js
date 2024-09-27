@@ -121,7 +121,7 @@ export default function CreateCampaign() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Goal (in ETH)</label>
+                    <label className={styles.formLabel}>Goal (in POL)</label>
                     <input
                         type="text"
                         value={goal}

@@ -83,11 +83,11 @@ export default function Campaigns() {
                             <div className={styles.featuredStats}>
                                 <div className={styles.statItem}>
                                     <span className={styles.statLabel}>Goal</span>
-                                    <span className={styles.statValue}>{featuredCampaign.goal} ETH</span>
+                                    <span className={styles.statValue}>{featuredCampaign.goal} POL</span>
                                 </div>
                                 <div className={styles.statItem}>
                                     <span className={styles.statLabel}>Pledged</span>
-                                    <span className={styles.statValue}>{featuredCampaign.pledged} ETH</span>
+                                    <span className={styles.statValue}>{featuredCampaign.pledged} POL</span>
                                 </div>
                                 <div className={styles.statItem}>
                                     <span className={styles.statLabel}>Contributors</span>
@@ -122,11 +122,11 @@ export default function Campaigns() {
                             <div className={styles.campaignStats}>
                                 <div className={styles.statItem}>
                                     <span className={styles.statLabel}>Goal</span>
-                                    <span className={styles.statValue}>{campaign.goal} ETH</span>
+                                    <span className={styles.statValue}>{campaign.goal} POL</span>
                                 </div>
                                 <div className={styles.statItem}>
                                     <span className={styles.statLabel}>Pledged</span>
-                                    <span className={styles.statValue}>{campaign.pledged} ETH</span>
+                                    <span className={styles.statValue}>{campaign.pledged} POL</span>
                                 </div>
                             </div>
                             <Link href={`/campaigns/${campaign.address}`} className={styles.viewButton}>
