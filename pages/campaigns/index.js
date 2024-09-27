@@ -7,6 +7,7 @@ import Campaign from '../../artifacts/contracts/Campaign.sol/Campaign.json';
 import styles from '../../styles/Campaigns.module.css';
 
 const CAMPAIGN_FACTORY_ADDRESS = '0x83449E6622C6826D029F32641D6167b40C339974';
+const FALLBACK_IMAGE = '/fallback.png';
 
 export default function Campaigns() {
     const [campaigns, setCampaigns] = useState([]);
@@ -65,17 +66,15 @@ export default function Campaigns() {
                 <div className={styles.featuredCampaign}>
                     <h2 className={styles.featuredTitle}>Featured Campaign</h2>
                     <div className={styles.featuredContent}>
-                        {featuredCampaign.image && (
-                            <div className={styles.featuredImageWrapper}>
-                                <Image
-                                    src={featuredCampaign.image}
-                                    alt={featuredCampaign.campaignName}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    unoptimized
-                                />
-                            </div>
-                        )}
+                        <div className={styles.featuredImageWrapper}>
+                            <Image
+                                src={featuredCampaign.image || FALLBACK_IMAGE}
+                                alt={featuredCampaign.campaignName}
+                                layout="fill"
+                                objectFit="cover"
+                                onError={(e) => { e.target.src = FALLBACK_IMAGE; }}
+                            />
+                        </div>
                         <div className={styles.featuredDetails}>
                             <h3 className={styles.featuredName}>{featuredCampaign.campaignName}</h3>
                             <p className={styles.featuredOwner}>by {featuredCampaign.ownerName}</p>
@@ -104,17 +103,15 @@ export default function Campaigns() {
             <div className={styles.campaignsGrid}>
                 {campaigns.map((campaign, index) => (
                     <div key={index} className={styles.campaignCard}>
-                        {campaign.image && (
-                            <div className={styles.campaignImageWrapper}>
-                                <Image
-                                    src={campaign.image}
-                                    alt={campaign.campaignName}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    unoptimized
-                                />
-                            </div>
-                        )}
+                        <div className={styles.campaignImageWrapper}>
+                            <Image
+                                src={campaign.image || FALLBACK_IMAGE}
+                                alt={campaign.campaignName}
+                                layout="fill"
+                                objectFit="cover"
+                                onError={(e) => { e.target.src = FALLBACK_IMAGE; }}
+                            />
+                        </div>
                         <div className={styles.campaignContent}>
                             <h2 className={styles.campaignName}>{campaign.campaignName}</h2>
                             <p className={styles.campaignOwner}>by {campaign.ownerName}</p>

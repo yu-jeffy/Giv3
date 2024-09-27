@@ -3,6 +3,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 import NavBar from '../components/NavBar';
 import ConfigContext from '../components/ConfigContext';
+import Head from 'next/head';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
@@ -43,6 +44,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiProvider config={config}>
         <QueryClientProvider client={client}>
           <RainbowKitProvider theme={midnightTheme()} initialChain={sepolia}>
+            <Head>
+              <title>giv3</title>
+            </Head>
             <NavBar/>
             <Component {...pageProps} />
           </RainbowKitProvider>
