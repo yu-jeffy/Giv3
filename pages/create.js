@@ -19,9 +19,9 @@ export default function CreateCampaign() {
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        const isValid = goal && deadline && prompt && imageUrl && campaignName && ownerName && description;
+        const isValid = goal && deadline && imageUrl && campaignName && ownerName && description;
         setIsFormValid(isValid);
-    }, [goal, deadline, prompt, imageUrl, campaignName, ownerName, description]);
+    }, [goal, deadline, imageUrl, campaignName, ownerName, description]);
 
     useEffect(() => {
         async function switchToPolygonNetwork() {
@@ -60,30 +60,30 @@ export default function CreateCampaign() {
     }, []);
 
     const generateImage = async () => {
-        setImageLoading(true);
-        setMessage('');
+        // setImageLoading(true);
+        // setMessage('');
 
-        try {
-            const response = await fetch('/api/dalle', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ prompt }),
-            });
+        // try {
+        //     const response = await fetch('/api/dalle', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({ prompt }),
+        //     });
 
-            const data = await response.json();
-            if (response.ok) {
-                setImageUrl(data.imageUrl);
-                setMessage('Image generated successfully!');
-            } else {
-                setMessage(data.error);
-            }
-        } catch (error) {
-            setMessage('Failed to generate image');
-        } finally {
-            setImageLoading(false);
-        }
+        //     const data = await response.json();
+        //     if (response.ok) {
+        //         setImageUrl(data.imageUrl);
+        //         setMessage('Image generated successfully!');
+        //     } else {
+        //         setMessage(data.error);
+        //     }
+        // } catch (error) {
+        //     setMessage('Failed to generate image');
+        // } finally {
+        //     setImageLoading(false);
+        // }
     };
 
     const createCampaign = async (event) => {
@@ -177,23 +177,22 @@ export default function CreateCampaign() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Image Prompt</label>
+                    <label className={styles.formLabel}>Image URL</label>
                     <input
                         type="text"
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
                         className={styles.formInput}
                         required
                     />
-                    <button type="button" onClick={generateImage} disabled={loading} className={styles.formButton}>
-                        {loading ? 'Generating...' : 'Generate Image'}
-                    </button>
                 </div>
+                {/*
                 {imageUrl && (
                     <div className={styles.formGroup}>
                         <img src={imageUrl} alt="Generated" className={styles.generatedImage} />
                     </div>
                 )}
+                */}
                 <button type="submit" disabled={!isFormValid} className={styles.formButton}>
                     {loading ? 'Creating...' : 'Create Campaign'}
                 </button>
