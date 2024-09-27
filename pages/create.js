@@ -23,6 +23,42 @@ export default function CreateCampaign() {
         setIsFormValid(isValid);
     }, [goal, deadline, prompt, imageUrl, campaignName, ownerName, description]);
 
+    useEffect(() => {
+        async function switchToPolygonNetwork() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x89' }] // Chain ID for Polygon Mainnet
+                });
+            } catch (switchError) {
+                if (switchError.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: '0x89',
+                                chainName: 'Polygon Mainnet',
+                                nativeCurrency: {
+                                    name: 'MATIC',
+                                    symbol: 'MATIC',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://polygon-rpc.com/'],
+                                blockExplorerUrls: ['https://polygonscan.com/']
+                            }]
+                        });
+                    } catch (addError) {
+                        console.error(addError);
+                    }
+                } else {
+                    console.error(switchError);
+                }
+            }
+        }
+
+        switchToPolygonNetwork();
+    }, []);
+
     const generateImage = async () => {
         setImageLoading(true);
         setMessage('');

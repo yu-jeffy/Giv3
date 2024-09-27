@@ -19,6 +19,38 @@ export default function CampaignDetails() {
     useEffect(() => {
         if (!address) return
 
+        async function switchToPolygonNetwork() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x89' }] // Chain ID for Polygon Mainnet
+                });
+            } catch (switchError) {
+                if (switchError.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: '0x89',
+                                chainName: 'Polygon Mainnet',
+                                nativeCurrency: {
+                                    name: 'MATIC',
+                                    symbol: 'MATIC',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://polygon-rpc.com/'],
+                                blockExplorerUrls: ['https://polygonscan.com/']
+                            }]
+                        });
+                    } catch (addError) {
+                        console.error(addError);
+                    }
+                } else {
+                    console.error(switchError);
+                }
+            }
+        }
+
         async function fetchCampaignDetails() {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
             const campaignContract = new ethers.Contract(address, Campaign.abi, provider)
@@ -42,8 +74,8 @@ export default function CampaignDetails() {
             setLoading(false)
         }
 
-        fetchCampaignDetails()
-    }, [address,successMessage])
+        switchToPolygonNetwork().then(fetchCampaignDetails)
+    }, [address, successMessage])
 
     const handleDonate = async () => {
         if (!donationAmount) return
