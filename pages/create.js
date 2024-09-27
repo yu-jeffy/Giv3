@@ -14,6 +14,7 @@ export default function CreateCampaign() {
     const [ownerName, setOwnerName] = useState(''); // New state for owner name
     const [description, setDescription] = useState(''); // New state for description
     const [loading, setLoading] = useState(false);
+    const [imageLoading, setImageLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -23,7 +24,7 @@ export default function CreateCampaign() {
     }, [goal, deadline, prompt, imageUrl, campaignName, ownerName, description]);
 
     const generateImage = async () => {
-        setLoading(true);
+        setImageLoading(true);
         setMessage('');
 
         try {
@@ -45,7 +46,7 @@ export default function CreateCampaign() {
         } catch (error) {
             setMessage('Failed to generate image');
         } finally {
-            setLoading(false);
+            setImageLoading(false);
         }
     };
 
@@ -154,7 +155,6 @@ export default function CreateCampaign() {
                 </div>
                 {imageUrl && (
                     <div className={styles.formGroup}>
-                        <label className={styles.formLabel}>Generated Image</label>
                         <img src={imageUrl} alt="Generated" className={styles.generatedImage} />
                     </div>
                 )}
