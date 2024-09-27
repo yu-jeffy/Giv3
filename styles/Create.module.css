@@ -17,14 +17,14 @@
     margin-top: 20px;
 }
 
-.form label {
+.formLabel {
     margin-top: 10px;
 }
 
-.form input, .form textarea {
+.formInput, .formTextarea {
     margin-top: 5px;
 }
 
-.form button {
+.formButton {
     margin-top: 20px;
 }

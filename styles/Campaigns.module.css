@@ -1,18 +1,211 @@
-.container {
+.root {
+    --primary-color: #3e3e3e;
+    --secondary-color: #606060;
+    --background-color: #f4f7f9;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --text-light: #777777;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  .container {
+    composes: root;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
-
-.title {
-    font-size: 2em;
-    color: #333;
-}
-
-.campaignList {
+    padding: 40px 20px;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .mainTitle {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .loading {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .featuredCampaign {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  
+  .featuredCampaign:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .featuredTitle {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    margin: 0;
+  }
+  
+  .featuredContent {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  
+  .featuredImageWrapper {
+    flex: 1;
+    position: relative;
+    height: 400px;
+  }
+  
+  .featuredDetails {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .featuredName {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+  }
+  
+  .featuredOwner {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin: 0 0 20px 0;
+  }
+  
+  .featuredDescription {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .featuredStats {
+    display: flex;
     justify-content: space-between;
-    margin: 20px 0;
-}
+    margin-bottom: 30px;
+  }
+  
+  .campaignsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .campaignCard {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  
+  .campaignCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .campaignImageWrapper {
+    position: relative;
+    height: 200px;
+  }
+  
+  .campaignContent {
+    padding: 20px;
+  }
+  
+  .campaignName {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+  }
+  
+  .campaignOwner {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0 0 15px 0;
+  }
+  
+  .campaignDescription {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .campaignStats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+  }
+  
+  .statValue {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: bold;
+  }
+  
+  .viewButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: var(--transition);
+    text-align: center;
+  }
+  
+  .viewButton:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  @media (max-width: 768px) {
+    .featuredContent {
+      flex-direction: column;
+    }
+  
+    .featuredImageWrapper {
+      height: 250px;
+    }
+  
+    .featuredDetails {
+      padding: 20px;
+    }
+  
+    .campaignsGrid {
+      grid-template-columns: 1fr;
+    }
+  }

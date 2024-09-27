@@ -19,7 +19,7 @@ import { getDefaultConfig, RainbowKitProvider, midnightTheme } from '@rainbow-me
 
 const config = getDefaultConfig({
   appName: 'giv3',
-  projectId: 'giv3',
+  projectId: 'aead2177f58437ab7eb2081a27fba935',
   chains: [
     /* 
     mainnet,
@@ -29,7 +29,7 @@ const config = getDefaultConfig({
     base,
     zora,
     */
-    sepolia,
+    polygon,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia] : []),
   ],
   ssr: true,
