@@ -11,8 +11,6 @@ class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="icon" href="/favicon.ico" />
-                    <script src="https://js.stripe.com/v3/"></script>
-                    <script src="https://crypto-js.stripe.com/crypto-onramp-outer.js"></script>
                 </Head>
                 <body>
                     <Main />

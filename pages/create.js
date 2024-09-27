@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import CampaignFactory from '../artifacts/contracts/CampaignFactory.sol/CampaignFactory.json';
 import styles from '../styles/Create.module.css';
@@ -15,6 +15,12 @@ export default function CreateCampaign() {
     const [description, setDescription] = useState(''); // New state for description
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    useEffect(() => {
+        const isValid = goal && deadline && prompt && imageUrl && campaignName && ownerName && description;
+        setIsFormValid(isValid);
+    }, [goal, deadline, prompt, imageUrl, campaignName, ownerName, description]);
 
     const generateImage = async () => {
         setLoading(true);
@@ -152,7 +158,7 @@ export default function CreateCampaign() {
                         <img src={imageUrl} alt="Generated" className={styles.generatedImage} />
                     </div>
                 )}
-                <button type="submit" disabled={loading || !imageUrl} className={styles.formButton}>
+                <button type="submit" disabled={!isFormValid} className={styles.formButton}>
                     {loading ? 'Creating...' : 'Create Campaign'}
                 </button>
             </form>

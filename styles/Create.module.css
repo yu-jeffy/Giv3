@@ -3,28 +3,98 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-    font-size: 2em;
+    font-size: 2.5em;
     color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    width: 50%; /* Adjust as needed */
-    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+    margin-bottom: 15px;
 }
 
 .formLabel {
-    margin-top: 10px;
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 5px;
 }
 
 .formInput, .formTextarea {
-    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #333;
+}
+
+.formTextarea {
+    resize: vertical;
+    height: 100px;
 }
 
 .formButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.formButton:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.generatedImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.message {
     margin-top: 20px;
+    font-size: 1em;
+    color: #333;
 }
